@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".AddBookActivity">
+
+    <!-- Overview category -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Label -->
+        <TextView
+            android:text="@string/book_information"
+            style="@style/CategoryStyle"
+            android:textColor="@color/black"/>
+
+        <!-- Input fields -->
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:paddingStart="4dp"
+            android:orientation="vertical">
+
+            <!-- Name field -->
+            <EditText
+                android:id="@+id/book_name_edittext"
+                android:hint="@string/book_name"
+                android:inputType="textCapWords"
+                style="@style/EditorFieldStyle" />
+
+            <!-- Author field -->
+            <EditText
+                android:id="@+id/author_edittext"
+                android:hint="@string/author"
+                android:inputType="textCapWords"
+                style="@style/EditorFieldStyle" />
+
+            <EditText
+                android:id="@+id/released_year"
+                android:hint="@string/released_year"
+                android:inputType="number"
+                android:maxLength="4"
+                style="@style/EditorFieldStyle" />
+            <EditText
+                android:id="@+id/quantity"
+                android:hint="@string/quantity"
+                android:inputType="number"
+                style="@style/EditorFieldStyle" />
+
+            <EditText
+                android:id="@+id/price"
+                android:hint="@string/price"
+                android:inputType="numberDecimal"
+                style="@style/EditorFieldStyle" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container_genre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Label -->
+        <TextView
+            android:text="@string/genre"
+            android:textColor="@color/black"
+            style="@style/CategoryStyle" />
+
+        <!-- Input field -->
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <!-- Gender drop-down spinner -->
+            <Spinner
+                android:id="@+id/spinner_genre"
+                android:layout_height="48dp"
+                android:layout_width="wrap_content"
+                android:paddingEnd="16dp"
+                android:spinnerMode="dropdown"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container_Supplier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Label -->
+        <TextView
+            android:text="@string/supplier"
+            android:textColor="@color/black"
+            style="@style/CategoryStyle" />
+
+        <!-- Input fields -->
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:paddingStart="4dp">
+
+            <!-- Weight field -->
+            <EditText
+                android:id="@+id/supplier_name"
+                android:hint="@string/supplier_name"
+                android:inputType="textCapWords"
+                style="@style/EditorFieldStyle" />
+
+            <!-- Weight field -->
+            <EditText
+                android:id="@+id/supplier_contact"
+                android:hint="@string/supplier_contact"
+                android:inputType="number"
+                android:layout_below="@id/supplier_name"
+                style="@style/EditorFieldStyle" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

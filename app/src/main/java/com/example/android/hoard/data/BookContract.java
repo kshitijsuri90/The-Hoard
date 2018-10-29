@@ -15,6 +15,13 @@ public class BookContract {
         public static final String PRICE = "price";
         public static final String QUANTITY = "quantity";
         public static final String RELEASED_YEAR = "released_year";
+        public static final int GENRE_FICTION = 0;
+        public static final int GENRE_HORROR = 1;
+        public static final int GENRE_DRAMA = 2;
+        public static final int GENRE_TRAVEL = 3;
+        public static final int GENRE_OTHER= 4;
+
+
 
     }
 }
