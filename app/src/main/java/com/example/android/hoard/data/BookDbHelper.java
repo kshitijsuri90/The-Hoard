@@ -29,7 +29,7 @@ public class BookDbHelper extends SQLiteOpenHelper {
                 + BookContract.BookEntry.AUTHOR + " TEXT, "
                 + BookContract.BookEntry.GENRE + " INTEGER NOT NULL, "
                 + BookContract.BookEntry.SUPPLIER_NAME + " TEXT,"
-                + BookContract.BookEntry.SUPPLIER_CONTACT + " TEXT NOT NULL DEFAULT '9824112365', "
+                + BookContract.BookEntry.SUPPLIER_CONTACT + " TEXT NOT NULL , "
                 + BookContract.BookEntry.QUANTITY + " INTEGER, "
                 + BookContract.BookEntry.PRICE + " INTEGER NOT NULL,"
                 + BookContract.BookEntry.RELEASED_YEAR + " INTEGER NOT NULL );";

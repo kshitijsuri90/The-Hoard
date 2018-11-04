@@ -11,7 +11,6 @@
     <string name="genre_drama">Drama</string>
     <string name="genre_travel">Travel</string>
     <string name="genre_other">Other</string>
-
     <string name="supplier">Supplier</string>
     <string name="supplier_name">Supplier Name</string>
     <string name="supplier_contact">Supplier Contact</string>
@@ -21,4 +20,23 @@
     <string name="delete_all_entries">Delete All Entries</string>
     <string name="delete">Delete</string>
     <string name="save">Save</string>
+    <string name="unknown">Unknown</string>
+    <string name="your_book_store_is_empty">Your inventory is empty</string>
+    <string name="delete_entries">Delete all entries</string>
+    <string name="error_delete">Error deleting data</string>
+    <string name="success_delete">Delete successful</string>
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+    <string name="discard">Discard</string>
+    <string name="keep_editing">Keep Editing</string>
+    <string name="editor_delete_pet_successful">Pet deleted</string>
+    <string name="editor_delete_pet_failed">Error with deleting pet</string>
+    <string name="delete_dialog_msg">Delete this pet?</string>
+    <string name="cancel">Cancel</string>
+    <string name="unknown_breed">Unknown breed</string>
+    <string name="error_log">Error with adding book to database</string>
+    <string name="saved">Book Saved</string>
+    <string name="error_updating">Error updating pet</string>
+    <string name="update_successful">Update successful</string>
+    <string name="add_book">Add a book</string>
+    <string name="edit_book">Edit Book details</string>
 </resources>

@@ -18,13 +18,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddBookActivity"
-            android:label="Add Book"
+        <activity android:name=".BookEditorActivity"
             android:theme="@style/EditorTheme"
             android:parentActivityName=".InventoryActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".InventoryActivity" />        </activity>
+                android:value=".InventoryActivity" />
+        </activity>
+
+        <provider
+            android:name=".data.BookProvider"
+            android:authorities="com.example.android.hoard"
+            android:exported="false"/>
+
     </application>
 
 </manifest>
