@@ -19,13 +19,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.android.hoard.data.BookContract;
 import com.example.android.hoard.data.BookDbHelper;
 
 public class InventoryActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private BookDbHelper mDbHelper = new BookDbHelper(this);
-    private long row_id = 0;
+    long row_id =0;
     private static final int BOOK_LOADER = 0;
     BookCursorAdapter bookCursorAdapter;
     @Override
@@ -58,6 +59,20 @@ public class InventoryActivity extends AppCompatActivity implements LoaderManage
             }
         });
 
+    }
+
+    public void bookSaleCount(int productID, int productQuantity) {
+        productQuantity = productQuantity - 1;
+        if (productQuantity >= 0) {
+            ContentValues values = new ContentValues();
+            values.put(BookContract.BookEntry.QUANTITY, productQuantity);
+            Uri updateUri = ContentUris.withAppendedId(BookContract.BookEntry.CONTENT_URI, productID);
+            int rowsAffected = getContentResolver().update(updateUri, values, null, null);
+            Toast.makeText(this,"Sale successful",Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(this,"Cannot make a sale",Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -114,6 +129,7 @@ public class InventoryActivity extends AppCompatActivity implements LoaderManage
                 BookContract.BookEntry.PRODUCT_NAME,
                 BookContract.BookEntry.AUTHOR,
                 BookContract.BookEntry.PRICE,
+                BookContract.BookEntry.QUANTITY
 
         };
         return new CursorLoader(this,

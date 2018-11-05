@@ -21,7 +21,7 @@
             android:textColor="@color/black"/>
 
         <!-- Input fields -->
-        <LinearLayout
+        <RelativeLayout
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="2"
@@ -40,6 +40,7 @@
                 android:id="@+id/author_edittext"
                 android:hint="@string/author"
                 android:inputType="textCapWords"
+                android:layout_below="@id/book_name_edittext"
                 style="@style/EditorFieldStyle" />
 
             <EditText
@@ -47,19 +48,40 @@
                 android:hint="@string/released_year"
                 android:inputType="number"
                 android:maxLength="4"
+                android:layout_below="@id/author_edittext"
                 style="@style/EditorFieldStyle" />
             <EditText
+                android:layout_marginTop="8dp"
                 android:id="@+id/quantity"
                 android:hint="@string/quantity"
                 android:inputType="number"
+                android:layout_below="@id/released_year"
                 style="@style/EditorFieldStyle" />
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:id="@+id/increase_quantity"
+                android:layout_below="@id/released_year"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/ic_caret_arrow_up" />
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:id="@+id/decrease_quantity"
+                android:layout_below="@id/increase_quantity"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/ic_caret_down" />
 
             <EditText
                 android:id="@+id/price"
                 android:hint="@string/price"
+                android:layout_below="@id/quantity"
                 android:inputType="numberDecimal"
                 style="@style/EditorFieldStyle" />
-        </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -122,8 +144,16 @@
                 android:id="@+id/supplier_contact"
                 android:hint="@string/supplier_contact"
                 android:inputType="number"
+                android:maxLength="10"
                 android:layout_below="@id/supplier_name"
                 style="@style/EditorFieldStyle" />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/call"
+                android:layout_below="@id/supplier_contact"
+                android:src="@drawable/ic_phone"
+                android:layout_alignParentEnd="true"/>
 
         </RelativeLayout>
     </LinearLayout>

@@ -39,4 +39,6 @@
     <string name="update_successful">Update successful</string>
     <string name="add_book">Add a book</string>
     <string name="edit_book">Edit Book details</string>
+    <string name="sale">Sale</string>
+    <string name="quantity_stock">Stock left |</string>
 </resources>

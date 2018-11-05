@@ -21,8 +21,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.android.hoard.data.BookContract;
 import com.example.android.hoard.data.BookDbHelper;
@@ -49,6 +51,9 @@ public class BookEditorActivity extends AppCompatActivity implements LoaderManag
     private EditText PriceEditText;
 
     private Spinner GenreSpinner;
+    private ImageButton call;
+    private ImageButton increase;
+    private ImageButton decrease;
 
     private int Genre = BookContract.BookEntry.GENRE_OTHER;
 
@@ -56,19 +61,12 @@ public class BookEditorActivity extends AppCompatActivity implements LoaderManag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_book);
-        // Examine the intent that was used to launch this activity,
-        // in order to figure out if we're creating a new pet or editing an existing one.
         Intent intent = getIntent();
         mCurrentBookUri = intent.getData();
-
-        // If the intent DOES NOT contain a pet content URI, then we know that we are
-        // creating a new pet.
         if (mCurrentBookUri == null) {
             // This is a new pet, so change the app bar to say "Add a Pet"
             setTitle(R.string.add_book);
 
-            // Invalidate the options menu, so the "Delete" menu option can be hidden.
-            // (It doesn't make sense to delete a pet that hasn't been created yet.)
             invalidateOptionsMenu();
         } else {
             // Otherwise this is an existing pet, so change app bar to say "Edit Pet"
@@ -86,6 +84,62 @@ public class BookEditorActivity extends AppCompatActivity implements LoaderManag
         QuantityEditText =  findViewById(R.id.quantity);
         SupplierNameEditText =  findViewById(R.id.supplier_name);
         SupplierContactEditText =  findViewById(R.id.supplier_contact);
+        increase = findViewById(R.id.increase_quantity);
+        increase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String quantity = QuantityEditText.getText().toString();
+                if(quantity.isEmpty() ){
+                    Toast.makeText(getApplicationContext(),"Enter valid quantity",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if(Integer.valueOf(quantity)<0){
+                        Toast.makeText(getApplicationContext(),"Quantity is not valid",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        int quantity_value = Integer.valueOf(quantity);
+                        quantity_value++;
+                        quantity = quantity_value+ "";
+                        QuantityEditText.setText(quantity);
+                    }
+                }
+            }
+        });
+        decrease = findViewById(R.id.decrease_quantity);
+        decrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String quantity = QuantityEditText.getText().toString();
+                if(quantity.isEmpty() ){
+                    Toast.makeText(getApplicationContext(),"Enter valid quantity",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if(Integer.valueOf(quantity)<=0){
+                        Toast.makeText(getApplicationContext(),"Quantity is not valid",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        int quantity_value = Integer.valueOf(quantity);
+                        quantity_value--;
+                        quantity = quantity_value+"";
+                        QuantityEditText.setText(quantity);
+                    }
+                }
+            }
+        });
+        call = findViewById(R.id.call);
+        call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String contact = SupplierContactEditText.getText().toString().trim();
+                if(contact.isEmpty()){
+                    Toast.makeText(getApplicationContext(),"No contact found",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", contact, null));
+                    startActivity(intent);
+                }
+            }
+        });
         GenreSpinner =findViewById(R.id.spinner_genre);
         NameEditText.setOnTouchListener(mTouchListener);
         AuthorEditText.setOnTouchListener(mTouchListener);
@@ -171,9 +225,35 @@ public class BookEditorActivity extends AppCompatActivity implements LoaderManag
         String quantity = QuantityEditText.getText().toString().trim();
         String sup_name = SupplierNameEditText.getText().toString().trim();
         String sup_contact = SupplierContactEditText.getText().toString().trim();
-
-        if (mCurrentBookUri == null && TextUtils.isEmpty(name) && TextUtils.isEmpty(author) &&TextUtils.isEmpty(price) &&TextUtils.isEmpty(quantity) && TextUtils.isEmpty(released_year) &&TextUtils.isEmpty(sup_contact)) {
+        if(mCurrentBookUri==null && name.isEmpty() && author.isEmpty() && price.isEmpty() && released_year.isEmpty() && quantity.isEmpty() &&sup_contact.isEmpty() && sup_name.isEmpty()){
+            Toast.makeText(getApplicationContext(),"Enter Data to save book",Toast.LENGTH_SHORT).show();
             return;
+        }
+        else if(name.isEmpty()) {
+            Toast.makeText(getApplicationContext(),"Enter Name",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if(author.isEmpty()){
+            Toast.makeText(getApplicationContext(),"Enter Author",Toast.LENGTH_SHORT).show();
+            return ;
+        }
+        else if(quantity.isEmpty()){
+            Toast.makeText(getApplicationContext(),"Enter Quantity",Toast.LENGTH_SHORT).show();
+            return ;
+        }
+        else if(price.isEmpty()){
+            Toast.makeText(getApplicationContext(),"Enter Price",Toast.LENGTH_SHORT).show();
+            return ;
+        }
+        else if (sup_contact.isEmpty()){
+            Toast.makeText(getApplicationContext(),"Enter Supplier Contact",Toast.LENGTH_SHORT).show();
+            return ;
+        }
+        else if(sup_name.isEmpty()){
+            sup_name = "Unknown";
+        }
+        else if(released_year.isEmpty()){
+            released_year = "unknown";
         }
         ContentValues values = new ContentValues();
         values.put(BookContract.BookEntry.PRODUCT_NAME,  name);
@@ -188,6 +268,7 @@ public class BookEditorActivity extends AppCompatActivity implements LoaderManag
             Uri new_uri = getContentResolver().insert(BookContract.BookEntry.CONTENT_URI, values);
             if (new_uri == null) {
                 Toast.makeText(getApplicationContext(), getString(R.string.error_log), Toast.LENGTH_LONG).show();
+
             } else {
                 Toast.makeText(getApplicationContext(), getString(R.string.saved), Toast.LENGTH_LONG).show();
             }
@@ -208,6 +289,7 @@ public class BookEditorActivity extends AppCompatActivity implements LoaderManag
                         Toast.LENGTH_SHORT).show();
             }
         }
+        finish();
     }
 
 
@@ -219,8 +301,6 @@ public class BookEditorActivity extends AppCompatActivity implements LoaderManag
             case R.id.action_save:
                 // Save pet to database
                 savePet();
-                // Exit activity
-                finish();
                 return true;
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:
